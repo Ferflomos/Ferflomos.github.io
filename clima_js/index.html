@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de Clima</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Consulta del Clima</h1>
+    <div id="weather-info"></div>
+    <div id="location-controls">
+        <button id="get-location">Obtener Clima Actual</button>
+        <input type="text" id="city-input" placeholder="Ingresa tu ciudad">
+        <button id="search-city">Buscar Ciudad</button>
+    </div>
+    <div id="weather-history">
+        <h2>Historial de Clima</h2>
+        <input type="text" id="filter-history" placeholder="Buscar en historial">
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Ciudad</th>
+                    <th>Temperatura</th>
+                    <th>Descripción</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Se llenará con los datos del historial -->
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

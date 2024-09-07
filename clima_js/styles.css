@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+#weather-info, #location-controls, #weather-history {
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 600px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#location-controls input, #location-controls button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+#weather-history input {
+    width: calc(100% - 22px);
+}
+
+#weather-history table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#weather-history th, #weather-history td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#weather-history th {
+    background-color: #f4f4f4;
+}
+
+@media (max-width: 600px) {
+    #location-controls input, #location-controls button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    #weather-history table {
+        font-size: 14px;
+    }
+
+    #weather-info, #location-controls, #weather-history {
+        margin: 10px;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    #location-controls input, #location-controls button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #weather-history table {
+        font-size: 12px;
+    }
+
+    #weather-info, #location-controls, #weather-history {
+        margin: 5px;
+        padding: 5px;
+    }
+}
