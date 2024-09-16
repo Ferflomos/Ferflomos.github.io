@@ -24,10 +24,11 @@ function error() {
 }
 
 function fetchWeather(city, lat = null, lon = null) {
-    const apiKey = '6798d92ccdffd2e4456da81c0b768de7';
+    const apiKey = '6798d92ccdffd2e4456da81c0b768de7';/*<---------INGRESA LA APIKEY AQUI--------> */
     const url = city ? 
-        `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` : 
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` : 
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
 
     fetch(url)
         .then(response => response.json())
@@ -67,7 +68,7 @@ function saveToHistory(data) {
 }
 
 function checkSignificantChange(data) {
-    const tempThreshold = 10; // Ejemplo de umbral
+    const tempThreshold = 10; 
     if (previousTemp !== null && Math.abs(data.main.temp - previousTemp) > tempThreshold) {
         notifyUser(`Cambio significativo en el clima: ${data.weather[0].description}`);
     }
