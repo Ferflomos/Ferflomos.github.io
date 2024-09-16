@@ -1,6 +1,10 @@
 document.getElementById('get-location').addEventListener('click', () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error);
+        navigator.geolocation.getCurrentPosition(success, error, {
+            enableHighAccuracy: true, 
+            timeout: 5000, 
+            maximumAge: 0 
+        });
     } else {
         alert('Geolocalización no soportada en este navegador.');
     }
@@ -16,31 +20,44 @@ document.getElementById('search-city').addEventListener('click', () => {
 function success(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
+    console.log(`Ubicación obtenida: Lat ${lat}, Lon ${lon}`); // Depuración
     fetchWeather(null, lat, lon);
 }
 
 function error() {
     alert('No se pudo obtener la ubicación.');
+    console.error('Error al obtener la ubicación'); // Depuración
 }
 
 function fetchWeather(city, lat = null, lon = null) {
-    const apiKey = '6798d92ccdffd2e4456da81c0b768de7';/*<---------INGRESA LA APIKEY AQUI--------> */
+    const apiKey = '6798d92ccdffd2e4456da81c0b768de7'; // <-------Coloca tu apiKey aqui <----------------
     const url = city ? 
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` : 
-    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric` : 
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
 
+    console.log(`URL de la API: ${url}`); // Depuración para verificar la URL
 
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            console.log(`Código de estado: ${response.status}`); // Depuración para verificar el código de estado
+            if (!response.ok) {
+                throw new Error(`Error en la respuesta de la API: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Datos del clima obtenidos:', data); // Depuración
             if (data.cod === 200) {
                 displayWeather(data);
                 saveToHistory(data);
             } else {
-                alert('Error al obtener los datos del clima.');
+                throw new Error(`Error en los datos de la API: ${data.cod}`);
             }
         })
-        .catch(() => alert('Error al conectar con la API del clima.'));
+        .catch(error => {
+            console.error('Error al conectar con la API del clima:', error); // Depuración
+            alert('Error al conectar con la API del clima.');
+        });
 }
 
 function displayWeather(data) {
